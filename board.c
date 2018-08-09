@@ -24,6 +24,7 @@ Board BOARD_2 =
 };
 
 void board_Load(Board board, Board boardToLoad) {
+  printf("board loaded\n");
    /* TODO */
 }
 

@@ -22,17 +22,15 @@ void game_PlayGame(){
 	char userInput[INPUT_MAX_LENGTH + EXTRA_SPACES];
 	getInput("Press return to continue...\n", userInput, sizeof(userInput));
 	if(strstr(userInput, "\n")!=NULL) {
-		break;
-	}
-	printf(
-
-	);
-	getInput(
-		"At this stage of the program only two commands are acceptable:\n"
-		"load <g>\n"
-		"quit\n", userInput, sizeof(userInput));
-		if(strstr(userInput, "load")!=NULL) {
-			break;
+		getInput(
+			"At this stage of the program only two commands are acceptable:\n"
+			"load <g>\n"
+			"quit\n", userInput, sizeof(userInput));
+			if(strcmp(userInput, "load 1")!=NULL || strcmp(userInput, "load 2")!=NULL) {
+				board_Load(BOARD_1,BOARD_1);
+			} else if (strcmp(userInput,"quit")!=NULL) {
+				return;
+			}
+			srand(0);
 		}
-		srand(0);
 	}

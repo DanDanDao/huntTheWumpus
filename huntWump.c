@@ -39,6 +39,7 @@ void userInput() {
 
     if (strcmp(input,"1")==0) {
       game_PlayGame();
+      break;
     } else if (strcmp(input,"2")==0) {
       showStudentInformation();
     } else if (strcmp(input,"3")==0) {

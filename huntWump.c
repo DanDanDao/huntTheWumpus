@@ -37,11 +37,11 @@ void userInput() {
   while(TRUE) {
     getInput("Please enter your choice: ", input, sizeof(input));
 
-    if (strcmp(input,"1")) {
+    if (strcmp(input,"1")==0) {
       game_PlayGame();
-    } else if (strcmp(input,"2")) {
+    } else if (strcmp(input,"2")==0) {
       showStudentInformation();
-    } else if (strcmp(input,"3")) {
+    } else if (strcmp(input,"3")==0) {
       break;
     } else {
       printInvalidInput();
@@ -55,7 +55,7 @@ void showStudentInformation() {
     "Name: Quang Dao\n"
     "Student ID: s3687103\n"
     "Email: s3687103@student.rmit.edu.au\n"
-    "----------------------------------\n"
+    "----------------------------------\n\n"
   );
   /* TODO not provided */
 }

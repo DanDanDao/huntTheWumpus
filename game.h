@@ -1,8 +1,8 @@
 /*
- * COSC1076 Assignment 1, Semester 2 2018
- * Student name  :
- * Student number:
- */
+* COSC1076 Assignment 1, Semester 2 2018
+* Student name  :
+* Student number:
+*/
 #ifndef GAME_H
 #define GAME_H
 
@@ -24,18 +24,24 @@
 #define COMMAND_QUIT "quit"
 
 /**
- * Main menu option 1 - play the game as per the specification.
- *
- * This function makes all the calls to board & player and handles interaction
- * with the user (reading input from the console, error checking, etc...).
- *
- * It should be possible to break this function down into smaller functions -
- * but this is up to you to decide and is entirely your own design. You can
- * place the additional functions in this header file if you want.
- *
- * Note that if you don't break this function up it could become pretty big...
- * and marks are allocated to good coding practices.
- */
+* Main menu option 1 - play the game as per the specification.
+*
+* This function makes all the calls to board & player and handles interaction
+* with the user (reading input from the console, error checking, etc...).
+*
+* It should be possible to break this function down into smaller functions -
+* but this is up to you to decide and is entirely your own design. You can
+* place the additional functions in this header file if you want.
+*
+* Note that if you don't break this function up it could become pretty big...
+* and marks are allocated to good coding practices.
+*/
+
+#define INPUT_MAX_LENGTH 1
+#define NEW_LINE_SPACE 1
+#define NULL_SPACE 1
+#define EXTRA_SPACES (NEW_LINE_SPACE + NULL_SPACE)
+
 void game_PlayGame();
 
 /* TODO not provided */

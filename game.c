@@ -6,6 +6,6 @@
 #include "game.h"
 
 void game_PlayGame(){
-
+	printf("Press return to continue...\n");
 	srand(0);
 }

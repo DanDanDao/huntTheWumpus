@@ -5,32 +5,29 @@
 */
 #include "huntWump.h"
 
-void showMenu();
-void userInput();
-void theGame();
-
-
 int main()
 {
   /**
   * Here's the main function. You can write the "main menu" loop/code
   * here or you can make separate functions - up to you.
   */
-  showMenu();
-  userInput();
 
   /* TODO not provided */
+  showMenu();
+  userInput();
   printf("Good bye! \n\n");
 
   return EXIT_SUCCESS;
 }
 
 void showMenu() {
-  printf("Welcome to Hunt the Wumpus\n");
-  printf("--------------------------\n");
-  printf("1. Play game\n");
-  printf("2. Show student information\n");
-  printf("3. Quit\n\n");
+  printf(
+    "Welcome to Hunt the Wumpus\n"
+    "--------------------------\n"
+    "1. Play game\n"
+    "2. Show student information\n"
+    "3. Quit\n\n"
+  );
 }
 
 void userInput() {
@@ -38,30 +35,27 @@ void userInput() {
   char input[INPUT_MAX_LENGTH + EXTRA_SPACES];
 
   while(TRUE) {
-    getInput("Please enter your choice", input, sizeof(input));
+    getInput("Please enter your choice: ", input, sizeof(input));
 
-    if (input == 1) {
-      theGame();
-    } else if (input == 2) {
+    if (strcmp(input,"1")) {
+      game_PlayGame();
+    } else if (strcmp(input,"2")) {
       showStudentInformation();
-    } else if (input == 3) {
+    } else if (strcmp(input,"3")) {
       break;
     } else {
-      printf("Invalid Input!\n");
+      printInvalidInput();
     }
   }
 }
 
 void showStudentInformation() {
-  printf("----------------------------------\n");
-  printf("Name: Quang Dao\n");
-  printf("Student ID: s3687103\n");
-  printf("Email: s3687103@student.rmit.edu.au\n");
-  printf("----------------------------------\n");
-  /* TODO not provided */
-}
-
-void theGame() {
-  printf("Press return to continue...\n");
+  printf(
+    "----------------------------------\n"
+    "Name: Quang Dao\n"
+    "Student ID: s3687103\n"
+    "Email: s3687103@student.rmit.edu.au\n"
+    "----------------------------------\n"
+  );
   /* TODO not provided */
 }

@@ -15,44 +15,6 @@ void readRestOfLine()
 	clearerr(stdin);
 }
 
-typedef enum
-{
-    false = 0, true = 1
-} bool;
-
-#define INPUT_MAX_LENGTH 1
-#define NEW_LINE_SPACE 1
-#define NULL_SPACE 1
-#define EXTRA_SPACES (NEW_LINE_SPACE + NULL_SPACE)
-
-void input()
-{
-    /* char input[80 + 2]; */
-    char input[INPUT_MAX_LENGTH + EXTRA_SPACES];
-
-    while(true)
-    {
-        printf("Enter input up to %d characters: ", INPUT_MAX_LENGTH);
-
-        fgets(input, sizeof(input), stdin);
-        if(input[strlen(input) - 1] != '\n')
-        {
-            printf("Input was too long, try again. \n\n");
-            readRestOfLine();
-            continue;
-        }
-        /**
-         * You can strip off the new line at the end of the string here if you want.
-         * Typically you do because most of the time you don't want the \n to be processed.
-         */
-        input[strlen(input) - 1] = '\0';
-
-        break;
-    }
-    printf("Your input was '%s' \n", input);
-    printf("\n");
-}
-
 ReadInputResult readInput(char * str, int num, FILE * stream)
 {
 	char * result;

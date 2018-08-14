@@ -49,12 +49,12 @@ void userInput() {
   }
 }
 
-void showStudentInformation() {
-  printf(
-    "----------------------------------\n"
-    "Name: Quang Dao\n"
-    "Student ID: s3687103\n"
-    "Email: s3687103@student.rmit.edu.au\n"
-    "----------------------------------\n\n"
-  );
+void showStudentInformation()
+{
+	printf("----------------------------------\n");
+	printf("Name: %s\n", STUDENT_NAME);
+	printf("No: %s\n", STUDENT_ID);
+	printf("Email: %s\n", STUDENT_EMAIL);
+	printf("----------------------------------\n");
+	printf("\n");
 }

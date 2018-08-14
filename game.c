@@ -6,6 +6,7 @@
 #include "game.h"
 
 void game_PlayGame(){
+
 	printf(
 		"You can use the following commands to play the game:\n"
 		" load <g>\n"
@@ -19,8 +20,11 @@ void game_PlayGame(){
 		"west (or w)\n"
 		"quit\n"
 	);
+
 	char userInput[INPUT_MAX_LENGTH + EXTRA_SPACES];
+
 	getInput("Press return to continue...\n", userInput, sizeof(userInput));
+	
 	if(strstr(userInput, "\n")!=NULL) {
 		getInput(
 			"At this stage of the program only two commands are acceptable:\n"

@@ -6,16 +6,29 @@
 #include "player.h"
 
 void player_Initialise(Player * player, Position position){
-   /* TODO */
+  player -> position = position;
+  player -> numArrows = 5;
 }
 
 
 Position player_GetNextPosition(Position position, Direction direction){
-   /* TODO */
+
+  Position positon;
+
+  positon = direction -> positon;
+
+  if (player -> direction == player_NORTH) {
+    positon.y--;
+  } else if (player -> direction == player_EAST) {
+    positon.x++;
+  } else if (player -> direction == player_SOUTH) {
+    positon.y++;
+  } else if (player -> direction == player_WEST) {
+    positon.x--;
+  }
    return position;
 }
 
 void player_UpdatePosition(Player * player, Position position) {
-   /* TODO */
+  player -> position = position;
 }
-

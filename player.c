@@ -11,7 +11,7 @@ void player_Initialise(Player * player, Position position){
 }
 
 
-Position player_GetNextPosition(Position position, Direction direction){
+Position player_GetNextPosition(Direction direction){
 
   Position positon;
 

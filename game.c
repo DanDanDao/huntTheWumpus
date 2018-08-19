@@ -30,8 +30,10 @@ void game_PlayGame(){
 			"At this stage of the program only two commands are acceptable:\n"
 			"load <g>\n"
 			"quit\n", userInput, sizeof(userInput));
-			if(strcmp(userInput, "load 1")!=0 || strcmp(userInput, "load 2")!=0) {
+			if(strcmp(userInput, "load 1")!=0) {
 				board_Load(BOARD_1,BOARD_1);
+			} else if (strcmp(userInput, "load 2")!=0) {
+				board_Load(BOARD_2,BOARD_2);
 			} else if (strcmp(userInput,"quit")!=0) {
 				return;
 			}

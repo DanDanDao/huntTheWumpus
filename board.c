@@ -38,16 +38,16 @@ Boolean board_PlacePlayer(Board board, Position position) {
   int column;
   int row;
 
-  row = positon.x;
-  column = positon.y;
+  row = position.x;
+  column = position.y;
 
   if ((column < 0 || column > BOARD_HEIGHT) || (row < 0 || row > BOARD_WIDTH)) {
-    printf("Unable to place player – outside bounds\n\n", );
+    printf("Unable to place player – outside bounds\n\n");
     return FALSE;
   }
 
   if (board[column][row] == board_EMPTY) {
-    board[column][row] = PLAYER;
+    board[column][row] = board_PLAYER;
     return TRUE;
   }
 

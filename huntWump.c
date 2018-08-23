@@ -8,57 +8,91 @@
 #include "huntWump.h"
 
 int main() {
-  char userMenuInput[ USER_MAX_INPUT ];
-  int menuInput = 0;
-    do{
-      displayWumpusMenu();
-      while (TRUE) {
-        char * menuPromt = "Please Enter your choice: ";
-        getInput( menuPromt,
-                  userMenuInput,
-                  USER_MENU_INPUT_PARAMETER ) ;
-        menuInput = atoi( userMenuInput );
-        if( !( menuInput<4 && menuInput>0 )) {
-          printInvalidInput();
-          continue;
-        }
-        else
-          break;
-      }
-        switch( menuInput ) {
-          case 1:
-            game_PlayGame();
-            menuInput = 0;
-            break;
+  // char userMenuInput[ USER_MAX_INPUT ];
+  // int menuInput = 0;
+  //   do{
+  //     displayWumpusMenu();
+  //     while (TRUE) {
+  //       char * menuPromt = "Please Enter your choice: ";
+  //       getInput( menuPromt,
+  //                 userMenuInput,
+  //                 USER_MENU_INPUT_PARAMETER ) ;
+  //       menuInput = atoi( userMenuInput );
+  //       if( !( menuInput<4 && menuInput>0 )) {
+  //         printInvalidInput();
+  //         continue;
+  //       }
+  //       else
+  //         break;
+  //     }
+  //       switch( menuInput ) {
+  //         case 1:
+  //           game_PlayGame();
+  //           menuInput = 0;
+  //           break;
+  //
+  //         case 2:
+  //           showStudentInformation();
+  //           menuInput = 0;
+  //           break;
+  //
+  //         case 3:
+  //           printf("\nGood bye! \n\n");
+  //           break;
+  //       }
+  //
+  //   }while( menuInput > 3 || menuInput < 1 );
+  //
+  //  return EXIT_SUCCESS;
+  /**
+* Here's the main function. You can write the "main menu" loop/code
+* here or you can make separate functions - up to you.
+*/
 
-          case 2:
-            showStudentInformation();
-            menuInput = 0;
-            break;
+/* TODO not provided */
+showMenu();
+userInput();
+printf("Good bye! \n\n");
 
-          case 3:
-            printf("\nGood bye! \n\n");
-            break;
-        }
-
-    }while( menuInput > 3 || menuInput < 1 );
-
-   return EXIT_SUCCESS;
+return EXIT_SUCCESS;
 }
 
-void displayWumpusMenu() {
-  printf("\n\n- - - - - - - - - - - - - -\n");
-  printf("Welcome to Hunt the Wumpus\n");
-  printf("- - - - - - - - - - - - - -\n\n");
-  printf("1. Play Game\n");
-  printf("2. Show Student Information\n");
-  printf("3. Quit\n\n");
+void showMenu() {
+  printf(
+    "Welcome to Hunt the Wumpus\n"
+    "--------------------------\n"
+    "1. Play game\n"
+    "2. Show student information\n"
+    "3. Quit\n\n"
+  );
+}
+
+void userInput() {
+
+  char input[INPUT_MAX_LENGTH + EXTRA_SPACES];
+
+  while(TRUE) {
+    getInput("Please enter your choice: ", input, sizeof(input));
+
+    if (strcmp(input,"1")==0) {
+      game_PlayGame();
+      break;
+    } else if (strcmp(input,"2")==0) {
+      showStudentInformation();
+    } else if (strcmp(input,"3")==0) {
+      break;
+    } else {
+      printInvalidInput();
+    }
+  }
 }
 
 void showStudentInformation() {
-  printf("\n\n- - - - - - - - - - - - - - - - - - - - - - - -");
-  printf("\nName: " STUDENT_NAME);
-  printf("\nStudent ID: " STUDENT_ID);
-  printf("\nStudent Email: " STUDENT_EMAIL);
-  printf("\n- - - - - - - - - - - - - - - - - - - - - - - -\n\n");
+  printf(
+    "----------------------------------\n"
+    "Name: Quang Dao\n"
+    "Student ID: s3687103\n"
+    "Email: s3687103@student.rmit.edu.au\n"
+    "----------------------------------\n\n"
+  );
 }

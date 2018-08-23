@@ -6,8 +6,8 @@
 #include "player.h"
 
 void player_Initialise( Player * player, Position position ) {
-   player->position = position;
-   player->numArrows = INIT_ARROW_COUNT;
+   player -> position = position;
+   player -> numArrows = INIT_ARROW_COUNT;
 }
 
 Position player_GetNextPosition( Position position, Direction direction ){
@@ -30,5 +30,5 @@ Position player_GetNextPosition( Position position, Direction direction ){
 }
 
 void player_UpdatePosition( Player * player, Position position ) {
-   player->position=position;
+   player -> position = position;
 }

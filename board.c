@@ -25,8 +25,8 @@ Board BOARD_2 =
 
 void board_Load( Board board, Board boardToLoad ) {
   int column, row;
-  for ( column=0; column < BOARD_WIDTH; column++ ){
-    for ( row=0; row < BOARD_HEIGHT; row++ ) {
+  for ( column = 0; column < BOARD_WIDTH; column++ ){
+    for ( row = 0; row < BOARD_HEIGHT; row++ ) {
       board[column][row] = boardToLoad[column][row];
     }
   }

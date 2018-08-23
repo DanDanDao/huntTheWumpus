@@ -1,8 +1,8 @@
 /*
- * COSC1076 Assignment 1, Semester 2 2018
- * Student name  : Quang Viet Dao
- * Student number: s3687103
- */
+* COSC1076 Assignment 1, Semester 2 2018
+* Student name  : Quang Viet Dao
+* Student number: s3687103
+*/
 #ifndef GAME_H
 #define GAME_H
 
@@ -23,6 +23,20 @@
 #define COMMAND_SHOOT "shoot"
 #define COMMAND_QUIT "quit"
 
+/**
+* Main menu option 1 - play the game as per the specification.
+*
+* This function makes all the calls to board & player and handles interaction
+* with the user (reading input from the console, error checking, etc...).
+*
+* It should be possible to break this function down into smaller functions -
+* but this is up to you to decide and is entirely your own design. You can
+* place the additional functions in this header file if you want.
+*
+* Note that if you don't break this function up it could become pretty big...
+* and marks are allocated to good coding practices.
+*/
+
 #define USER_MAX_INPUT 10
 #define MAXIMUM_LOAD_INPUT 6
 #define MAXIMUM_INIT_INPUT 8
@@ -31,41 +45,10 @@
 #define MAXIMUM_INIT_PARAMETERS (EXTRA_SPACES + MAXIMUM_INIT_INPUT)
 #define MAXIMUM_PLAY_PARAMETERS (EXTRA_SPACES + MAXIMUM_PLAY_INPUT)
 
-/**
- * Main menu option 1 - play the game as per the specification.
- *
- * This function makes all the calls to board & player and handles interaction
- * with the user (reading input from the console, error checking, etc...).
- *
- * It should be possible to break this function down into smaller functions -
- * but this is up to you to decide and is entirely your own design. You can
- * place the additional functions in this header file if you want.
- *
- * Note that if you don't break this function up it could become pretty big...
- * and marks are allocated to good coding practices.
- */
- 
 void game_PlayGame();
-
-/**
- * Gets direction from user input and assign that to a temporary position and
- * return true
- */
 Boolean getDirection();
-
-/**
- * Checks for empty spaces for player to move and return true/ false
- */
 Boolean checkEmptySpace();
-
-/**
- *Load stated board by the user
- */
-void OptionLoadBoard();
-
-/**
- *Prints out the display menu
- */
+void optionLoadBoard();
 void displayGameMenu();
 
 #endif

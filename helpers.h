@@ -1,8 +1,8 @@
 /*
- * COSC1076 Assignment 1, Semester 2 2018
- * Student name  : Quang Viet Dao
- * Student number: s3687103
- */
+* COSC1076 Assignment 1, Semester 2 2018
+* Student name  : Quang Viet Dao
+* Student number: s3687103
+*/
 #ifndef HELPERS_H
 #define HELPERS_H
 
@@ -22,17 +22,17 @@ typedef enum boolean
 #define NULL_SPACE 1
 
 /**
- * This is used to compensate for the extra character spaces taken up by
- * the '\n' and '\0' when input is read through fgets().
- **/
+* This is used to compensate for the extra character spaces taken up by
+* the '\n' and '\0' when input is read through fgets().
+**/
 #define EXTRA_SPACES (NEW_LINE_SPACE + NULL_SPACE)
 
 #define EMPTY_STRING ""
 
 /**
- * Call this function whenever you detect buffer overflow but only call this
- * function when this has happened.
- **/
+* Call this function whenever you detect buffer overflow but only call this
+* function when this has happened.
+**/
 void readRestOfLine();
 
 /* TODO not provided */

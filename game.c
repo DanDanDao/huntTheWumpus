@@ -19,7 +19,9 @@ void game_PlayGame(){
 	playerRandomPosition,
 	playerShootDirection;
 	int quit=FALSE;
+
 	displayGameMenu();
+	
 	getInput("Press enter to continue...", enterButton, sizeof( enterButton ));
 
 	/*LOAD OPTION*/
@@ -44,7 +46,7 @@ void game_PlayGame(){
 						int boardChoice = atoi( secondChar );
 						if ( strcmp( firstChar, COMMAND_LOAD )==0 &&
 						( boardChoice==1 || boardChoice==2 )) {
-							OptionLoadBoard( currentBoard, boardChoice );
+							optionLoadBoard( currentBoard, boardChoice );
 							break;
 						}
 						else {
@@ -269,7 +271,7 @@ void game_PlayGame(){
 												return FALSE;
 											}
 
-											void OptionLoadBoard( Board board, int userLoadChoice ) {
+											void optionLoadBoard( Board board, int userLoadChoice ) {
 												if ( userLoadChoice == 1 ){
 													board_Load( board, BOARD_1) ;
 													printf("Board 1 successfully loaded\n\n");

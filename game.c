@@ -6,6 +6,7 @@
 #include "game.h"
 
 void game_PlayGame(){
+
 	Board currentBoard;
 	char enterButton[USER_MAX_INPUT];
 	char userLoadInput[MAXIMUM_LOAD_PARAMETERS];
@@ -21,53 +22,48 @@ void game_PlayGame(){
 	int quit=FALSE;
 
 	displayGameMenu();
-	
-	getInput("Press enter to continue...", enterButton, sizeof( enterButton ));
+
+	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
 
 	/*LOAD OPTION*/
-	while ( quit==FALSE ) {
+	while (quit==FALSE) {
 		char *firstChar;
 		char *secondChar;
 		getInput(
 			"At this stage of the program, only two commands are acceptable:\n"
 			"load <g>\n"
 			"quit\n\n"
-			"Please enter your choice: ", userLoadInput, sizeof( userLoadInput ));
+			"Please enter your choice: ", userLoadInput, sizeof(userLoadInput));
 
-			firstChar = strtok( userLoadInput, " " );
-			if ( firstChar != NULL ){
-				if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
+			firstChar = strtok(userLoadInput, " ");
+			if (firstChar != NULL) {
+				if (strcmp(firstChar, COMMAND_QUIT) == 0) {
 					quit = TRUE;
 					break;
-				}
-				else {
+				} else {
 					secondChar = strtok(NULL, " ");
-					if ( secondChar != NULL ) {
-						int boardChoice = atoi( secondChar );
-						if ( strcmp( firstChar, COMMAND_LOAD )==0 &&
-						( boardChoice==1 || boardChoice==2 )) {
+					if (secondChar != NULL) {
+						int boardChoice = atoi(secondChar);
+						if (strcmp(firstChar, COMMAND_LOAD) == 0 && (boardChoice == 1 || boardChoice == 2 )) {
 							optionLoadBoard( currentBoard, boardChoice );
 							break;
-						}
-						else {
+						} else {
 							printInvalidInput();
 							continue;
 						}
-					}
-					else {
+					} else {
 						printInvalidInput();
 						continue;
 					}
 				}
-			}
-			else {
+			} else {
 				printInvalidInput();
 				continue;
 			}
 		}
 
 		/*INIT OPTION*/
-		while ( quit==FALSE ) {
+		while (quit==FALSE) {
 			char *firstChar;
 			char *secondChar;
 			getInput(
@@ -76,225 +72,183 @@ void game_PlayGame(){
 				"quit\n\n"
 				"Please enter your choice: ", userInitInput, sizeof(userInitInput));
 
-				firstChar = strtok( userInitInput, " " );
-				if ( firstChar != NULL ) {
-					if ( strcmp( firstChar, COMMAND_QUIT ) == 0) {
+				firstChar = strtok(userInitInput, " ");
+				if (firstChar != NULL) {
+					if (strcmp(firstChar, COMMAND_QUIT) == 0) {
 						quit = TRUE;
 						break;
-					}
-					else {
-						secondChar = strtok( NULL, "," );
-						if ( secondChar != NULL ) {
-							char *thirdChar = strtok( NULL, "," );
-							if ( thirdChar != NULL ) {
-								int positionX = atoi( secondChar );
-								int positionY = atoi( thirdChar );
-								if ( strcmp(firstChar, COMMAND_INIT )==0 &&
-								(( positionX<=4 && positionX>=1 ) &&
-								( positionY<=4 && positionY>=1 ))) {
+					} else {
+						secondChar = strtok(NULL, ",");
+						if (secondChar != NULL) {
+							char *thirdChar = strtok(NULL, ",");
+							if (thirdChar != NULL) {
+								int positionX = atoi(secondChar);
+								int positionY = atoi(thirdChar);
+								if (strcmp(firstChar, COMMAND_INIT) == 0 && positionX <= 3 && positionX >= 0 && positionY <= 3 && positionY >= 0) {
 									playerCurrentPosition.x = positionX;
 									playerCurrentPosition.y = positionY;
-									if ( board_PlacePlayer( currentBoard,
-										playerCurrentPosition ) ==
-										TRUE ) {
-											player_Initialise( &newPlayer, playerCurrentPosition );
-											printf( "Player Initialized\n" );
-											break;
-										}
-										else {
-											printf( "Invalid Space\n\n" );
-											continue;
-										}
-									}
-									else {
-										printInvalidInput();
+									if (board_PlacePlayer(currentBoard, playerCurrentPosition) ==	TRUE) {
+										player_Initialise(&newPlayer, playerCurrentPosition);
+										printf( "Player Initialized\n" );
+										break;
+									} else {
+										printf( "Invalid Space\n\n" );
 										continue;
 									}
-								}
-								else {
+								} else {
 									printInvalidInput();
 									continue;
 								}
-							}
-							else {
+							} else {
 								printInvalidInput();
 								continue;
 							}
+						} else {
+							printInvalidInput();
+							continue;
 						}
 					}
-					else {
-						printInvalidInput();
-						continue;
-					}
+				} else {
+					printInvalidInput();
+					continue;
 				}
+			}
 
-				/*PLAY OPTIONS*/
-				while ( quit==FALSE ) {
-					char *firstChar;
-					board_Display( currentBoard );
-					board_DisplayWarnings( currentBoard, playerCurrentPosition );
-					getInput("\n\nAt this stage of the program, only three commands are "
-					"acceptable:\n"
+			/*PLAY OPTIONS*/
+			while (quit==FALSE) {
+				char *firstChar;
+				board_Display(currentBoard);
+				board_DisplayWarnings(currentBoard, playerCurrentPosition);
+				getInput(
+					"\n\nAt this stage of the program, only three commands are acceptable:\n"
 					"<directions>\n"
 					"shoot <directions>\n"
 					"quit\n"
 					"Where <direction> is one of: north,n,south,s,east,e,west,w\n\n"
-					"Please enter your choice: ",
-					userPlayInput,
-					sizeof( userPlayInput ));
+					"Please enter your choice: ", userPlayInput, sizeof( userPlayInput ));
 
-					firstChar = strtok( userPlayInput, " " );
-					if ( firstChar != NULL ) {
-						if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
+					firstChar = strtok(userPlayInput, " ");
+					if (firstChar != NULL) {
+						if (strcmp(firstChar, COMMAND_QUIT) == 0) {
 							quit = TRUE;
 							break;
 						}
-						if ( getDirection( firstChar, &moveDirection )) {
-							playerNextPosition = player_GetNextPosition( playerCurrentPosition,
-								moveDirection );
-								if ( board_MovePlayer( currentBoard,
-									playerCurrentPosition,
-									playerNextPosition ) ==
-									board_PLAYER_MOVED ) {
-										printf("Player moved.\n");
-										playerCurrentPosition = playerNextPosition;
-										player_UpdatePosition( &newPlayer, playerCurrentPosition );
+						if (getDirection(firstChar, &moveDirection)) {
+							playerNextPosition = player_GetNextPosition(playerCurrentPosition, moveDirection);
+							if (board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition) == board_PLAYER_MOVED) {
+								printf("Player moved.\n");
+								playerCurrentPosition = playerNextPosition;
+								player_UpdatePosition( &newPlayer, playerCurrentPosition );
+								continue;
+							} else if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_BAT_CELL) {
+								/*Random Placement*/
+								printf("Bat Cell!\n");
+								do {
+									playerRandomPosition.x = rand() % ( BOARD_HEIGHT );
+									playerRandomPosition.y = rand() % ( BOARD_HEIGHT );
+								} while (checkEmptySpace(currentBoard, playerRandomPosition) == FALSE);
+								currentBoard[playerRandomPosition.y][playerRandomPosition.x] = board_PLAYER;
+								currentBoard[playerCurrentPosition.y][playerCurrentPosition.x] = board_TRAVERSED;
+								playerCurrentPosition = playerRandomPosition;
+								player_UpdatePosition(&newPlayer, playerCurrentPosition);
+								continue;
+							} else if (board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition) == board_OUTSIDE_BOUNDS) {
+								printf("Unable to move - outside bounds.\n");
+								continue;
+							} else  {
+								printf("Player killed!\n");
+								break;
+							}
+						} else {
+							char *secondChar = strtok(NULL, " ");
+							if (strcmp(firstChar, COMMAND_SHOOT) == 0 && getDirection(secondChar, &shootDirection) == TRUE) {
+								/*SHOOT FUNCTION*/
+								if (newPlayer.numArrows>0) {
+									playerShootDirection = player_GetNextPosition(playerCurrentPosition, shootDirection);
+									if ( board_FireArrow(currentBoard, playerShootDirection) == board_WUMPUS_KILLED) {
+										printf("You killed the wumpus!\n");
+										break;
+									} else if (board_FireArrow(currentBoard, playerShootDirection) == board_ARROW_MISSED ){
+										newPlayer.numArrows--;
+										printf("Missed. You now have %d arrows.\n", newPlayer.numArrows);
+										continue;
+									} else {
+										printf("Unable to fire arrow in that direction.\n");
 										continue;
 									}
-									else if ( board_MovePlayer(
-										currentBoard,
-										playerCurrentPosition,
-										playerNextPosition ) ==
-										board_BAT_CELL ) {
-											/*Random Placement*/
-											printf("Bat Cell!\n");
-											do {
-												playerRandomPosition.x = rand() % ( BOARD_HEIGHT );
-												playerRandomPosition.y = rand() % ( BOARD_HEIGHT );
-											} while( checkEmptySpace( currentBoard,
-												playerRandomPosition ) == FALSE );
-												currentBoard[ playerRandomPosition.y ][ playerRandomPosition.x ] =
-												board_PLAYER;
-												currentBoard[ playerCurrentPosition.y ][ playerCurrentPosition.x ] =
-												board_TRAVERSED;
-												playerCurrentPosition = playerRandomPosition;
-												player_UpdatePosition( &newPlayer, playerCurrentPosition );
-												continue;
-											}
-											else if ( board_MovePlayer( currentBoard,
-												playerCurrentPosition,
-												playerNextPosition ) ==
-												board_OUTSIDE_BOUNDS ) {
-													printf("Unable to move - outside bounds.\n");
-													continue;
-												}
-												else  {
-													printf("Player killed!\n");
-													break;
-												}
-											}
-											else {
-												char *secondChar = strtok(NULL, " ");
-												if ( strcmp( firstChar, COMMAND_SHOOT ) == 0 &&
-												getDirection( secondChar, &shootDirection ) == TRUE ) {
-													/*SHOOT FUNCTION*/
-													if ( newPlayer.numArrows>0 ) {
-														playerShootDirection = player_GetNextPosition (
-															playerCurrentPosition,
-															shootDirection);
-															if ( board_FireArrow( currentBoard,
-																playerShootDirection ) ==
-																board_WUMPUS_KILLED ) {
-																	printf("You killed the wumpus!\n");
-																	break;
-																}
-																else if ( board_FireArrow( currentBoard,
-																	playerShootDirection ) ==
-																	board_ARROW_MISSED ){
-																		newPlayer.numArrows--;
-																		printf("Missed. You now have %d arrows.\n", newPlayer.numArrows);
-																		continue;
-																	}
-																	else {
-																		printf("Unable to fire arrow in that direction.\n");
-																		continue;
-																	}
-																}
-																else {
-																	printf("You don't have any more arrows to fire\n");
-																	continue;
-																}
-															}
-															else {
-																printInvalidInput();
-																continue;
-															}
-														}
-													}
-													else {
-														printInvalidInput();
-														continue;
-													}
-												}
-												srand(0);
-											}
+								} else {
+									printf("You don't have any more arrows to fire\n");
+									continue;
+								}
+							} else {
+								printInvalidInput();
+								continue;
+							}
+						}
+					} else {
+						printInvalidInput();
+						continue;
+					}
+				}
+				srand(0);
+			}
 
-											Boolean checkEmptySpace( Board board, Position position ) {
-												if ( board[position.y][position.x] == board_EMPTY ||  board[position.y][position.x] == board_TRAVERSED )
-												return TRUE;
-												else
-												return FALSE;
-											}
+			Boolean checkEmptySpace(Board board, Position position) {
+				if (board[position.y][position.x] == board_EMPTY || board[position.y][position.x] == board_TRAVERSED)
+				return TRUE;
+				else
+				return FALSE;
+			}
 
-											Boolean getDirection( char *userDirectionInput, Direction *tmpDirection ) {
-												if ( strcmp( userDirectionInput, COMMAND_NORTH ) == 0 ||
-												strcmp( userDirectionInput, COMMAND_NORTH_SHORTCUT ) == 0 ) {
-													*tmpDirection = player_NORTH;
-													return TRUE;
-												}
-												else if ( strcmp(userDirectionInput, COMMAND_SOUTH ) == 0 ||
-												strcmp(userDirectionInput, COMMAND_SOUTH_SHORTCUT ) == 0 ) {
-													*tmpDirection = player_SOUTH;
-													return TRUE;
-												}
-												else if ( strcmp( userDirectionInput, COMMAND_EAST ) == 0 ||
-												strcmp( userDirectionInput, COMMAND_EAST_SHORTCUT ) == 0 ) {
-													*tmpDirection = player_EAST;
-													return TRUE;
-												}
-												else if ( strcmp( userDirectionInput, COMMAND_WEST ) == 0 ||
-												strcmp( userDirectionInput, COMMAND_WEST_SHORTCUT ) == 0 ) {
-													*tmpDirection = player_WEST;
-													return TRUE;
-												}
-												else
-												return FALSE;
-											}
+			Boolean getDirection(char *userDirectionInput, Direction *tmpDirection) {
+				if (strcmp(userDirectionInput, COMMAND_NORTH) == 0 ||
+				strcmp(userDirectionInput, COMMAND_NORTH_SHORTCUT) == 0) {
+					*tmpDirection = player_NORTH;
+					return TRUE;
+				}
+				else if ( strcmp(userDirectionInput, COMMAND_SOUTH ) == 0 ||
+				strcmp(userDirectionInput, COMMAND_SOUTH_SHORTCUT ) == 0 ) {
+					*tmpDirection = player_SOUTH;
+					return TRUE;
+				}
+				else if ( strcmp( userDirectionInput, COMMAND_EAST ) == 0 ||
+				strcmp( userDirectionInput, COMMAND_EAST_SHORTCUT ) == 0 ) {
+					*tmpDirection = player_EAST;
+					return TRUE;
+				}
+				else if ( strcmp( userDirectionInput, COMMAND_WEST ) == 0 ||
+				strcmp( userDirectionInput, COMMAND_WEST_SHORTCUT ) == 0 ) {
+					*tmpDirection = player_WEST;
+					return TRUE;
+				}
+				else
+				return FALSE;
+			}
 
-											void optionLoadBoard( Board board, int userLoadChoice ) {
-												if ( userLoadChoice == 1 ){
-													board_Load( board, BOARD_1) ;
-													printf("Board 1 successfully loaded\n\n");
-												}
-												else {
-													board_Load( board, BOARD_2 );
-													printf("Board 2 successfully loaded\n\n");
-												}
+			void optionLoadBoard( Board board, int userLoadChoice ) {
+				if ( userLoadChoice == 1 ){
+					board_Load( board, BOARD_1) ;
+					printf("Board 1 successfully loaded\n\n");
+				}
+				else {
+					board_Load( board, BOARD_2 );
+					printf("Board 2 successfully loaded\n\n");
+				}
 
-											}
+			}
 
-											void displayGameMenu() {
-												printf(
-													"You can use the following commands to play the game:\n"
-													" load <g>\n"
-													"g: number of the game board to load (either 1 or 2)\n"
-													"init <x>,<y>\n"
-													" x: horizontal position of the player on the board (between 0 & 4)\n"
-													" y: vertical position of the player on the board (between 0 & 4)\n"
-													"north (or n)\n"
-													"south (or s)\n"
-													"east (or e)\n"
-													"west (or w)\n"
-													"quit\n\n"
-												);
-											}
+			void displayGameMenu() {
+				printf(
+					"You can use the following commands to play the game:\n"
+					" load <g>\n"
+					"g: number of the game board to load (either 1 or 2)\n"
+					"init <x>,<y>\n"
+					" x: horizontal position of the player on the board (between 0 & 4)\n"
+					" y: vertical position of the player on the board (between 0 & 4)\n"
+					"north (or n)\n"
+					"south (or s)\n"
+					"east (or e)\n"
+					"west (or w)\n"
+					"quit\n\n"
+				);
+			}

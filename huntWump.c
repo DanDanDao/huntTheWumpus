@@ -8,7 +8,6 @@
 #include "huntWump.h"
 
 int main() {
-
   /**
   * Here's the main function. You can write the "main menu" loop/code
   * here or you can make separate functions - up to you.

@@ -1,34 +1,34 @@
 /*
  * COSC1076 Assignment 1, Semester 2 2018
- * Student name  :
- * Student number:
+ * Student name  : Quang Viet Dao
+ * Student number: s3687103
  */
 #include "player.h"
 
-void player_Initialise(Player * player, Position position){
-  // player -> position = position;
-  // player -> numArrows = 5;
+void player_Initialise( Player * player, Position position ) {
+   player->position = position;
+   player->numArrows = INIT_ARROW_COUNT;
 }
 
+Position player_GetNextPosition( Position position, Direction direction ){
+   switch ( direction ) {
+     case 0:
+      position.y--;
+      break;
+     case 1:
+      position.x++;
+      break;
+     case 2:
+      position.y++;
+      break;
+     case 3:
+      position.x--;
+      break;
 
-Position player_GetNextPosition(Position position, Direction direction){
-  //
-  // Position position;
-  //
-  // positon = direction -> positon;
-  //
-  // if (player -> direction == player_NORTH) {
-  //   positon.y--;
-  // } else if (player -> direction == player_EAST) {
-  //   positon.x++;
-  // } else if (player -> direction == player_SOUTH) {
-  //   positon.y++;
-  // } else if (player -> direction == player_WEST) {
-  //   positon.x--;
-  // }
+   }
    return position;
 }
 
-void player_UpdatePosition(Player * player, Position position) {
-  // player -> position = position;
+void player_UpdatePosition( Player * player, Position position ) {
+   player->position=position;
 }

@@ -8,16 +8,9 @@
 #include "huntWump.h"
 
 int main() {
-  /**
-  * Here's the main function. You can write the "main menu" loop/code
-  * here or you can make separate functions - up to you.
-  */
-
-  /* TODO not provided */
   showMenu();
   userInput();
   printf("Good bye! \n\n");
-
   return EXIT_SUCCESS;
 }
 
@@ -32,12 +25,9 @@ void showMenu() {
 }
 
 void userInput() {
-
   char input[INPUT_MAX_LENGTH + EXTRA_SPACES];
-
   while(TRUE) {
     getInput("Please enter your choice: ", input, sizeof(input));
-
     if (strcmp(input,"1")==0) {
       game_PlayGame();
       break;

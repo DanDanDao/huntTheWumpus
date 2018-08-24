@@ -99,17 +99,17 @@ void board_Display(Board board) {
 void board_DisplayWarnings(Board board, Position position) {
   int x;
   int y;
-  char *warning[] = {"You hear flapping!", "You feel a breeze!", "You smell a wumpus!"};
+  char *warnings[] = {"You hear flapping!", "You feel a breeze!", "You smell a wumpus!"};
 
   for (x = position.x-1; x >= 0 && x <= position.x+1 && x < BOARD_WIDTH; x++) {
     for (y = position.y-1; y >= 0 && y <= position.y+1 && y < BOARD_HEIGHT; y++) {
-      int warningType = 2;
+      int index = 2;
       do {
-        if (board[y][x] == warningType) {
-          printf("%s ", warning[warningType-2]);
+        if (board[y][x] == index) {
+          printf("%s ", warnings[index-2]);
         }
-        warningType++;
-      } while (warningType<5);
+        index++;
+      } while (index<5);
     }
   }
 }
